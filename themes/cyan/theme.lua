@@ -1,9 +1,11 @@
 
 --[[
-                                     
-     Multicolor Awesome WM theme 2.0 
-     github.com/copycat-killer       
-                                     
+
+     Cyan Awesome WM theme 2.0
+     Modified Multicolor theme
+     github.com/copycat-killer
+     github.com/sudokamikaze
+
 --]]
 
 
@@ -15,15 +17,15 @@ local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
-theme.wallpaper                                 = theme.confdir .. "/wall.png"
-theme.font                                      = "xos4 Terminus 8"
+theme.wallpaper                                 = os.getenv("HOME") .. "/Pictures/njpfz.jpg"
+theme.font                                      = "PragmataPro 10"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
 theme.bg_normal                                 = "#000000"
 theme.bg_focus                                  = "#000000"
 theme.bg_urgent                                 = "#000000"
 theme.fg_normal                                 = "#aaaaaa"
-theme.fg_focus                                  = "#ff8c00"
+theme.fg_focus                                  = "#20B2AA"
 theme.fg_urgent                                 = "#af1d18"
 theme.fg_minimize                               = "#ffffff"
 theme.border_width                              = 1
@@ -34,24 +36,18 @@ theme.menu_border_width                         = 0
 theme.menu_width                                = 130
 theme.menu_submenu_icon                         = theme.confdir .. "/icons/submenu.png"
 theme.menu_fg_normal                            = "#aaaaaa"
-theme.menu_fg_focus                             = "#ff8c00"
+theme.menu_fg_focus                             = "#20B2AA"
 theme.menu_bg_normal                            = "#050505dd"
 theme.menu_bg_focus                             = "#050505dd"
 theme.widget_temp                               = theme.confdir .. "/icons/temp.png"
 theme.widget_uptime                             = theme.confdir .. "/icons/ac.png"
-theme.widget_cpu                                = theme.confdir .. "/icons/cpu.png"
-theme.widget_weather                            = theme.confdir .. "/icons/dish.png"
 theme.widget_fs                                 = theme.confdir .. "/icons/fs.png"
-theme.widget_mem                                = theme.confdir .. "/icons/mem.png"
 theme.widget_fs                                 = theme.confdir .. "/icons/fs.png"
 theme.widget_note                               = theme.confdir .. "/icons/note.png"
 theme.widget_note_on                            = theme.confdir .. "/icons/note_on.png"
 theme.widget_netdown                            = theme.confdir .. "/icons/net_down.png"
 theme.widget_netup                              = theme.confdir .. "/icons/net_up.png"
 theme.widget_mail                               = theme.confdir .. "/icons/mail.png"
-theme.widget_batt                               = theme.confdir .. "/icons/bat.png"
-theme.widget_clock                              = theme.confdir .. "/icons/clock.png"
-theme.widget_vol                                = theme.confdir .. "/icons/spkr.png"
 theme.taglist_squares_sel                       = theme.confdir .. "/icons/square_a.png"
 theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
 theme.tasklist_plain_task_name                  = true
@@ -96,14 +92,14 @@ local markup = lain.util.markup
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = wibox.widget.imagebox(theme.widget_clock)
-local mytextclock = wibox.widget.textclock(markup("#7788af", "%A %d %B ") .. markup("#535f7a", ">") .. markup("#de5e1e", " %H:%M "))
+local mytextclock = wibox.widget.textclock(markup("#20B2AA", "%A %d %B ") .. markup("#20B2AA", ">") .. markup("#20B2AA", " %H:%M "))
 mytextclock.font = theme.font
 
 -- Calendar
 theme.cal = lain.widget.calendar({
     attach_to = { mytextclock },
     notification_preset = {
-        font = "xos4 Terminus 10",
+        font = "PragmataPro 11",
         fg   = theme.fg_normal,
         bg   = theme.bg_normal
     }
@@ -112,13 +108,13 @@ theme.cal = lain.widget.calendar({
 -- Weather
 local weathericon = wibox.widget.imagebox(theme.widget_weather)
 theme.weather = lain.widget.weather({
-    city_id = 2643743, -- placeholder (London)
-    notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
-    weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
+    city_id = 695594, -- placeholder (Rivne)
+    notification_preset = { font = "PragmataPro 12", fg = theme.fg_normal },
+    weather_na_markup = markup.fontfg(theme.font, "#20B2AA", "N/A "),
     settings = function()
         descr = weather_now["weather"][1]["description"]:lower()
         units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fontfg(theme.font, "#eca4c4", descr .. " @ " .. units .. "°C "))
+        widget:set_markup(markup.fontfg(theme.font, "#20B2AA", descr .. " @ " .. units .. "°C "))
     end
 })
 
@@ -167,12 +163,12 @@ local cpu = lain.widget.cpu({
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
+        widget:set_markup(markup.fontfg(theme.font, "#c4c4c4", coretemp_now .. "°C "))
     end
 })
 
 -- Battery
-local baticon = wibox.widget.imagebox(theme.widget_batt)
+local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat = lain.widget.bat({
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
@@ -181,7 +177,7 @@ local bat = lain.widget.bat({
             perc = perc .. " plug"
         end
 
-        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, bat_now.perc .. " "))
+        widget:set_markup(markup.fontfg(theme.font, "#c4c4c4", bat_now.perc .. "% "))
     end
 })
 
@@ -218,7 +214,7 @@ local netupinfo = lain.widget.net({
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
+        widget:set_markup(markup.fontfg(theme.font, "#c4c4c4", mem_now.used .. "M "))
     end
 })
 
@@ -291,35 +287,16 @@ function theme.at_screen_connect(s)
             --s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
-            mpdicon,
-            theme.mpd.widget,
         },
         --s.mytasklist, -- Middle widget
         nil,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            --mailicon,
-            --mail.widget,
-            netdownicon,
-            netdowninfo,
-            netupicon,
-            netupinfo.widget,
-            volicon,
-            theme.volume.widget,
-            memicon,
-            memory.widget,
-            cpuicon,
-            cpu.widget,
-            fsicon,
-            theme.fs.widget,
-            weathericon,
-            theme.weather.widget,
-            tempicon,
             temp.widget,
-            baticon,
+            memory.widget,
             bat.widget,
-            clockicon,
+            theme.weather.widget,
             mytextclock,
         },
     }
