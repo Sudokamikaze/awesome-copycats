@@ -48,9 +48,9 @@ Features
 Gallery
 =======
 
-**Multicolor**, inspired by lucamanni_
+**Cyan**, Multicolor based theme
 
-.. image:: http://dotshare.it/public/images/uploads/650.png
+.. image:: https://raw.githubusercontent.com/Sudokamikaze/awesome-copycats/master/cyan.png
 
 **Powerarrow**, porting of romockee_'s
 
