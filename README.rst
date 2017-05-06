@@ -9,6 +9,7 @@ Themes for Awesome WM 4.x
 :Version: git
 :License: BY-NC-SA_
 :Source: https://github.com/copycat-killer/awesome-copycats
+:Modified: Cyan(Multicolor based) theme by @sudokamikaze
 
 Warning
 =======
